@@ -331,10 +331,12 @@ class Subir {
                                 $destino = $this->destino . $this->nombre . "." . $extension;
                             }                                                        
                             if (file_exists($destino)) {
-                                $partes = pathinfo($this->files["name"][$key]);
-                                $extension = $partes['extension'];
-                                $nombreOriginal = $partes['filename'];
-                                $this->motivoError = $this->motivoError."Archivo: ".$nombreOriginal.".".$extension." ya existe | ";
+                                if($this->nombre === "") {                                
+                                    $nombreError = $nombreOriginal;
+                                }else{
+                                    $nombreError = $this->nombre;
+                                }
+                                $this->motivoError = $this->motivoError."Archivo: ".$nombreError.".".$extension." ya existe | ";
                             }else{
                                move_uploaded_file($origen, $destino); 
                             }
